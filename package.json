@@ -1,15 +1,15 @@
 {
-  "name": "____FIX_ME____",
-  "description": "____FIX_ME____",
+  "name": "object-pick",
+  "description": "Creates an object composed of the picked object properties. Written in Typescript for ES2019+ environments.",
   "license": "MIT",
   "author": "Konstantin Vyatkin <tino@vtkn.io>",
-  "homepage": "https://github.com/tinovyatkin/____FIX_ME____#readme",
+  "homepage": "https://github.com/tinovyatkin/object-pick#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tinovyatkin/____FIX_ME____.git"
+    "url": "git+https://github.com/tinovyatkin/object-pick.git"
   },
   "bugs": {
-    "url": "https://github.com/tinovyatkin/____FIX_ME____/issues"
+    "url": "https://github.com/tinovyatkin/object-pick/issues"
   },
   "version": "1.0.0",
   "main": "dist/index.js",
@@ -37,7 +37,12 @@
     "typescript": "latest"
   },
   "keywords": [
-    "____FIX_ME____"
+    "object",
+    "pick",
+    "pickby",
+    "lodash-modularized",
+    "only",
+    "lodash-es"
   ],
   "engines": {
     "yarn": ">=1.19"
