@@ -30,6 +30,8 @@
     "valid-values-author": ["error", ["Konstantin Vyatkin <tino@vtkn.io>"]],
     "no-restricted-dependencies": ["error", ["lodash"]],
     "name-format": "error",
-    "version-format": "error"
+    "version-format": "error",
+    "prefer-no-dependencies": "error",
+    "prefer-no-optionalDependencies": "error"
   }
 }
