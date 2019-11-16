@@ -1,16 +1,10 @@
-# typescript-repo-template
-Template repository for my TypeScript projects, to avoid bolerplate creating:
+# object-pick
 
-- Base Typescript configuration
-- ESLint (with @typescript-eslint, Prettier config and `estlint-plugin-jest` for tests and lint task at GitHub Actions)
-- Jest (with TS-Jest, `jest-extended` and coverage reporting via Codecov on GitHub Actions)
-- Prettier configuration
-- Husky and lint-stagged
-- git configuration
-- Yarn configurations (prefix, autoclean, etc)
-- NPM configuration
-- Renovate configuration
-- VSCode configuration (editor config and recommended extensions)
-- SonarCloud configuration
-- Yamllint
-- Package.json lint and prettier
+It's like 7 years old TJ's `only` or `lodash.pick` and `lodash.pickBy` but written for today's world with TypeScript and `Object.fromEntries` supporting evironments:
+
+- https://node.green/#ES2019-features--Object-fromEntries (Node >= 12.4)
+- https://caniuse.com/#search=fromEntries
+- https://polyfill.io/v3/polyfill.min.js?features=Object.fromEntries
+- core-js polyfilled with Babel
+
+# License: MIT
