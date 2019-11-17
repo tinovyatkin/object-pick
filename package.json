@@ -45,6 +45,7 @@
     "lodash-es"
   ],
   "engines": {
+    "node": ">=12.4",
     "yarn": ">=1.19"
   }
 }
