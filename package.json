@@ -13,10 +13,9 @@
   },
   "version": "1.0.0",
   "main": "dist/index.js",
-  "types": "./dist/index.d.ts",
   "files": [
-    "dist/*.js",
-    "dist/*.d.ts"
+    "dist/*.d.ts",
+    "dist/*.js"
   ],
   "scripts": {
     "build": "tsc",
@@ -24,6 +23,7 @@
     "prepublishOnly": "jest && tsc",
     "test": "jest"
   },
+  "types": "./dist/index.d.ts",
   "devDependencies": {
     "@types/jest": "latest",
     "@typescript-eslint/eslint-plugin": "latest",
