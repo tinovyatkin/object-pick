@@ -1,4 +1,4 @@
-# object-pick
+# object-pick [![codecov](https://codecov.io/gh/tinovyatkin/object-pick/branch/master/graph/badge.svg)](https://codecov.io/gh/tinovyatkin/object-pick)
 
 It's similar to 7 years old TJ's `only` or `lodash.pick` and `lodash.pickBy` but written for today's world with TypeScript and `Object.fromEntries` supporting environments:
 
