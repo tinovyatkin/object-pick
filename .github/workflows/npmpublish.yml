@@ -15,6 +15,13 @@ jobs:
           node-version: 12
       - run: yarn install --frozen-lockfile --ignore-optional --non-interactive --silent
       - run: node --expose-gc node_modules/jest/bin/jest --forceExit --logHeapUsage --runInBand --ci
+      - name: Upload coverage to Codecov
+        # https://github.com/codecov/codecov-bash/blob/1044b7a243e0ea0c05ed43c2acd8b7bb7cef340c/codecov#L158
+        run: bash <(curl -s https://codecov.io/bash)
+          -f ./coverage/coverage-final.json
+          -Z || echo 'Codecov upload failed'
+        env:
+          CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
 
   lint-package:
     needs: test
@@ -37,7 +44,7 @@ jobs:
           node-version: 12
           registry-url: https://registry.npmjs.org/
       - run: yarn install --frozen-lockfile --ignore-optional --non-interactive --silent
-      - run: npm publish --access public
+      - run: yarn publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
 
@@ -52,6 +59,6 @@ jobs:
           registry-url: https://npm.pkg.github.com/
           scope: '@tinovyatkin'
       - run: yarn install --frozen-lockfile --ignore-optional --non-interactive --silent
-      - run: npm publish --access public
+      - run: yarn publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}

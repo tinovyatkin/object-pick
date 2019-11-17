@@ -1,5 +1,5 @@
 {
-  "name": "object-pick",
+  "name": "object-pickby",
   "description": "Creates an object composed of the picked object properties. Written in Typescript for ES2019+ environments.",
   "license": "MIT",
   "author": "Konstantin Vyatkin <tino@vtkn.io>",
