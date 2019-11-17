@@ -13,12 +13,17 @@
   },
   "version": "1.0.0",
   "main": "dist/index.js",
+  "files": [
+    "dist/*.d.ts",
+    "dist/*.js"
+  ],
   "scripts": {
-    "lint": "eslint --ext=ts ./src",
-    "test": "jest",
     "build": "tsc",
-    "prepublishOnly": "jest && tsc"
+    "lint": "eslint --ext=ts ./src",
+    "prepublishOnly": "jest && tsc",
+    "test": "jest"
   },
+  "types": "./dist/index.d.ts",
   "devDependencies": {
     "@types/jest": "latest",
     "@typescript-eslint/eslint-plugin": "latest",
@@ -37,14 +42,15 @@
     "typescript": "latest"
   },
   "keywords": [
-    "object",
-    "pick",
-    "pickby",
+    "lodash-es",
     "lodash-modularized",
+    "object",
     "only",
-    "lodash-es"
+    "pick",
+    "pickby"
   ],
   "engines": {
+    "node": ">=12.4",
     "yarn": ">=1.19"
   }
 }
