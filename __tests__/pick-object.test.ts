@@ -6,10 +6,11 @@ describe('pick with object', () => {
       foo: 'bar',
       bar: 'foo',
     };
-    const arr = ['a', 'b', 'c'];
     // @ts-expect-error
     expect(pick(obj)).toBe(obj);
+    // @ts-expect-error
     expect(pick(null, ['ss'])).toBeNull();
+    // @ts-expect-error
     expect(pick(undefined, ['dd'])).toBeUndefined();
     // @ts-expect-error
     expect(pick('nonobject', ['algo'])).toBe('nonobject');
