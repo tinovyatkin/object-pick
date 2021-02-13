@@ -1,0 +1,17 @@
+{
+  "root": true,
+  "plugins": ["jest"],
+  "extends": ["plugin:jest/recommended"],
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "env": {
+    "jest": true,
+    "jest/globals": true
+  },
+  "rules": {
+    "max-nested-callbacks": "off",
+    "max-lines": "off"
+  }
+}

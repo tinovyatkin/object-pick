@@ -14,7 +14,7 @@ describe('pick works with array', () => {
   });
 
   it('does not works with bad indexes', () => {
-    // @ts-ignore
+    // @ts-expect-error
     expect(() => pick([1, 2, 3, 4], [1, 'boo'])).toThrow(TypeError);
   });
 });

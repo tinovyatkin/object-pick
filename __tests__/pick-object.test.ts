@@ -1,5 +1,3 @@
-//@ts-nocheck
-
 import { pick } from '../src';
 
 describe('pick with object', () => {
@@ -8,15 +6,20 @@ describe('pick with object', () => {
       foo: 'bar',
       bar: 'foo',
     };
+    const arr = ['a', 'b', 'c'];
+    // @ts-expect-error
     expect(pick(obj)).toBe(obj);
     expect(pick(null, ['ss'])).toBeNull();
     expect(pick(undefined, ['dd'])).toBeUndefined();
+    // @ts-expect-error
     expect(pick('nonobject', ['algo'])).toBe('nonobject');
+    // @ts-expect-error
     expect(pick(obj, 'non-array')).toBe(obj);
   });
 
   it('returns empty object if no properties found', () => {
     expect(
+      // @ts-expect-error
       pick(
         {
           foo: 'bar',
@@ -39,6 +42,7 @@ describe('pick with object', () => {
 
   it('works with symbols', () => {
     expect(
+      // @ts-expect-error
       pick({ boo: 'bar', foo: 'eee', [Symbol.for('eee')]: 'aaaa' }, [
         'boo',
         Symbol.for('eee'),

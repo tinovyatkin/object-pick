@@ -13,17 +13,19 @@
  * only(object, ['a', 'c']);
  * // => { 'a': 1, 'c': 3 }
  */
+export function pick<T extends Record<PropertyKey, any>, U extends keyof T>(
+  object: T,
+  props: readonly U[],
+): Pick<T, U>;
+
 export function pick<T extends any[], U extends number[]>(
   array: T,
   indexes: readonly number[],
 ): T;
-export function pick<T extends object, U extends keyof T>(
+
+export function pick<T = object | any[]>(
   object: T,
-  props: readonly U[],
-): Pick<T, U>;
-export function pick(
-  object: object | any[],
-  props: readonly string[] | readonly number[],
+  props: T extends any[] ? readonly number[] : readonly string[],
 ) {
   if (!object || !Array.isArray(props)) return object;
 
