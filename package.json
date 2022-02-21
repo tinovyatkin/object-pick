@@ -32,7 +32,7 @@
     "eslint-config-prettier": "latest",
     "eslint-plugin-jest": "latest",
     "husky": "4.3.8",
-    "jest": "27.3.1",
+    "jest": "27.4.5",
     "jest-extended": "latest",
     "lint-staged": "latest",
     "npm-package-json-lint": "latest",
