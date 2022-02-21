@@ -1,6 +1,6 @@
 {
   "name": "object-pickby",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Creates an object composed of the picked object properties. Written in Typescript for ES2019+ environments.",
   "license": "MIT",
   "author": "Konstantin Vyatkin <tino@vtkn.io>",
@@ -27,7 +27,7 @@
     "prepublishOnly": "yarn test && yarn build",
     "test": "node --no-warnings --enable-source-maps --experimental-vm-modules ./node_modules/.bin/jest"
   },
-  "types": "./dist/index.d.ts",
+  "types": "./dist/esm/index.d.ts",
   "devDependencies": {
     "@types/jest": "27.4.0",
     "@typescript-eslint/eslint-plugin": "5.12.0",
