@@ -13,7 +13,7 @@
  * only(object, ['a', 'c']);
  * // => { 'a': 1, 'c': 3 }
  */
-export function pick<T extends Record<PropertyKey, unknown>, U extends keyof T>(
+export function pick<T extends object, U extends keyof T>(
   object: T,
   props: readonly U[],
 ): Pick<T, U>;

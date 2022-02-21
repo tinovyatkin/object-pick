@@ -2,7 +2,7 @@ export default {
   '*.ts': [
     'eslint --fix --quiet -f visualstudio',
     'prettier --write',
-    'yarn test --silent --no-coverage --forceExit --ci --bail',
+    'yarn test --silent --no-coverage --forceExit --ci --bail --findRelatedTests',
   ],
   '.env': ['git rm'],
   '*.{md,json,yaml,yml}': ['prettier --write'],
