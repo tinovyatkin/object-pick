@@ -33,7 +33,8 @@ jobs:
         with:
           node-version: 14
           cache: 'yarn'
-      - run: npx npmPkgJsonLint .
+      - run: yarn install --frozen-lockfile --ignore-optional --non-interactive --silent
+      - run: yarn npmPkgJsonLint .
 
   publish-npm:
     needs: lint-package
