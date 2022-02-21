@@ -43,7 +43,6 @@ describe('pick with object', () => {
 
   it('works with symbols', () => {
     expect(
-      // @ts-expect-error
       pick({ boo: 'bar', foo: 'eee', [Symbol.for('eee')]: 'aaaa' }, [
         'boo',
         Symbol.for('eee'),
