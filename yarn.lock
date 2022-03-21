@@ -2861,10 +2861,10 @@ normalize-path@^3.0.0:
   resolved "https://registry.yarnpkg.com/normalize-path/-/normalize-path-3.0.0.tgz#0dcd69ff23a1c9b11fd0978316644a0388216a65"
   integrity sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==
 
-npm-package-json-lint@6.2.0:
-  version "6.2.0"
-  resolved "https://registry.yarnpkg.com/npm-package-json-lint/-/npm-package-json-lint-6.2.0.tgz#a59be0af09ec2974fc70192e6ada24f3b033aad5"
-  integrity sha512-cEmwHc2l2oU8KTd9mLPQ+0buinuEM4DjAhiEC0URIYl+ukltoyEgRSGTCmpOv65Jqgu57HKkf166fpUksAXeXQ==
+npm-package-json-lint@6.3.0:
+  version "6.3.0"
+  resolved "https://registry.yarnpkg.com/npm-package-json-lint/-/npm-package-json-lint-6.3.0.tgz#25cd21782b34a3bd40e7568ddccfcc4a938fed5e"
+  integrity sha512-wOCWHSssQUzNvo85NYZweec5SNr9LtkB9tQzjOHjucoABJivtkOLcH/A/cfp6X+cPAC8UNzRC0K08HCm7G+rTA==
   dependencies:
     ajv "^6.12.6"
     ajv-errors "^1.0.1"
