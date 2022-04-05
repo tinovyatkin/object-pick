@@ -23,7 +23,7 @@ jobs:
       - run: yarn install --frozen-lockfile --ignore-optional --non-interactive --silent
       - run: yarn test --bail --colors --ci
 
-      - uses: codecov/codecov-action@v2
+      - uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           verbose: true
