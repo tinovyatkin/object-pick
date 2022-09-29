@@ -29,7 +29,7 @@
   },
   "types": "./dist/esm/index.d.ts",
   "devDependencies": {
-    "@types/jest": "29.0.3",
+    "@types/jest": "29.1.0",
     "@typescript-eslint/eslint-plugin": "5.36.2",
     "@typescript-eslint/parser": "5.36.2",
     "eslint": "8.24.0",
