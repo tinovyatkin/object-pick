@@ -1,7 +1,7 @@
 {
   "name": "object-pickby",
   "version": "2.0.2",
-  "description": "Creates an object composed of the picked object properties. Written in Typescript for ES2019+ environments.",
+  "description": "Creates an object composed of the picked object properties. Written in Typescript for ES2022+ environments.",
   "keywords": [
     "lodash-es",
     "lodash-modularized",
@@ -22,15 +22,23 @@
   },
   "files": [
     "dist/**/*.cjs",
+    "dist/**/*.cjs.map",
     "dist/**/*.d.ts",
-    "dist/**/*.js"
+    "dist/**/*.js",
+    "dist/**/*.js.map"
   ],
   "type": "module",
+  "sideEffects": false,
   "main": "./dist/cjs/index.cjs",
+  "module": "./dist/esm/index.js",
   "types": "./dist/esm/index.d.ts",
   "exports": {
-    "import": "./dist/esm/index.js",
-    "require": "./dist/cjs/index.cjs"
+    ".": {
+      "types": "./dist/esm/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.cjs",
+      "default": "./dist/esm/index.js"
+    }
   },
   "scripts": {
     "prepack": "lefthook install",
@@ -40,7 +48,7 @@
     "lint": "oxlint --type-aware ./src",
     "format": "oxfmt --write .",
     "format:check": "oxfmt --check .",
-    "prepublishOnly": "npm test && npm build",
+    "prepublishOnly": "npm test && npm run build",
     "test": "node --test --experimental-strip-types --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=lcov.info --test-reporter=junit --test-reporter-destination=junit.xml --test-reporter=spec --test-reporter-destination=stdout --test-coverage-include=src/**/*.ts ./__tests__/*.test.ts"
   },
   "devDependencies": {
@@ -52,6 +60,6 @@
     "typescript": "5.9.3"
   },
   "engines": {
-    "node": ">=12.4"
+    "node": ">=16.11"
   }
 }
