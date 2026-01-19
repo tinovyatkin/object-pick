@@ -1,56 +1,58 @@
-import { pick } from '../src';
+import assert from "node:assert/strict";
+import { describe, it } from "node:test";
 
-describe('pick with object', () => {
-  it('return the same object in while non existent props supplied', () => {
+import { pick } from "../src/index.ts";
+
+describe("pick with object", () => {
+  it("return the same object in while non existent props supplied", () => {
     const obj = {
-      foo: 'bar',
-      bar: 'foo',
+      foo: "bar",
+      bar: "foo",
     };
     // @ts-expect-error
-    expect(pick(obj)).toBe(obj);
+    assert.strictEqual(pick(obj), obj);
     // @ts-expect-error
-    expect(pick(null, ['ss'])).toBeNull();
+    assert.strictEqual(pick(null, ["ss"]), null);
     // @ts-expect-error
-    expect(pick(undefined, ['dd'])).toBeUndefined();
+    assert.strictEqual(pick(undefined, ["dd"]), undefined);
     // @ts-expect-error
-    expect(pick('nonobject', ['algo'])).toBe('nonobject');
+    assert.strictEqual(pick("nonobject", ["algo"]), "nonobject");
     // @ts-expect-error
-    expect(pick(obj, 'non-array')).toBe(obj);
+    assert.strictEqual(pick(obj, "non-array"), obj);
   });
 
-  it('returns empty object if no properties found', () => {
-    expect(
+  it("returns empty object if no properties found", () => {
+    assert.deepStrictEqual(
       // @ts-expect-error
       pick(
         {
-          foo: 'bar',
-          bar: 'foo',
+          foo: "bar",
+          bar: "foo",
         },
-        ['zoo'],
+        ["zoo"],
       ),
-    ).toEqual({});
-    expect(pick({ book: 1 }, [])).toEqual({});
+      {},
+    );
+    assert.deepStrictEqual(pick({ book: 1 }, []), {});
   });
 
-  it('returns new object with given properties', () => {
-    expect(
-      pick({ boo: 'bar', foo: 'eee', [Symbol.for('eee')]: 'aaaa' }, [
-        'boo',
-        'foo',
-      ]),
-    ).toEqual({ boo: 'bar', foo: 'eee' });
+  it("returns new object with given properties", () => {
+    assert.deepStrictEqual(
+      pick({ boo: "bar", foo: "eee", [Symbol.for("eee")]: "aaaa" }, ["boo", "foo"]),
+      { boo: "bar", foo: "eee" },
+    );
   });
 
-  it('works with symbols', () => {
-    expect(
-      pick({ boo: 'bar', foo: 'eee', [Symbol.for('eee')]: 'aaaa' }, [
-        'boo',
-        Symbol.for('eee'),
-      ]),
-    ).toEqual({ boo: 'bar', [Symbol.for('eee')]: 'aaaa' });
+  it("works with symbols", () => {
+    assert.deepStrictEqual(
+      pick({ boo: "bar", foo: "eee", [Symbol.for("eee")]: "aaaa" }, ["boo", Symbol.for("eee")]),
+      { boo: "bar", [Symbol.for("eee")]: "aaaa" },
+    );
   });
 
-  it('shortcut when requesting just one string property', () => {
-    expect(pick({ boo: 'bar', foo: 'eee' }, ['boo'])).toEqual({ boo: 'bar' });
+  it("shortcut when requesting just one string property", () => {
+    assert.deepStrictEqual(pick({ boo: "bar", foo: "eee" }, ["boo"]), {
+      boo: "bar",
+    });
   });
 });

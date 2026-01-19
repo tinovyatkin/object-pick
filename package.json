@@ -38,18 +38,17 @@
     "build": "tsc --module es2022 --moduleResolution node --outDir ./dist/esm && tsc --module commonjs --moduleResolution node --outDir ./dist/cjs",
     "postbuild": "mv ./dist/cjs/index.js ./dist/cjs/index.cjs && mv ./dist/cjs/index.js.map ./dist/cjs/index.cjs.map",
     "lint": "oxlint --type-aware ./src",
+    "format": "oxfmt --write .",
+    "format:check": "oxfmt --check .",
     "prepublishOnly": "npm test && npm build",
-    "test": "node --no-warnings --enable-source-maps --experimental-vm-modules ./node_modules/.bin/jest"
+    "test": "node --test --experimental-strip-types --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=lcov.info --test-reporter=junit --test-reporter-destination=junit.xml --test-reporter=spec --test-reporter-destination=stdout --test-coverage-include=src/**/*.ts ./__tests__/*.test.ts"
   },
   "devDependencies": {
-    "@types/jest": "29.5.8",
-    "jest": "29.7.0",
-    "jest-extended": "4.0.2",
+    "@types/node": "24.x",
     "lefthook": "2.0.15",
     "oxfmt": "0.26.0",
     "oxlint": "1.41.0",
     "oxlint-tsgolint": "0.11.1",
-    "ts-jest": "29.1.1",
     "typescript": "5.9.3"
   },
   "engines": {
