@@ -10,6 +10,27 @@ describe("pickBy with objects", () => {
     assert.deepStrictEqual(pickBy(obj, "ola-la"), obj);
   });
 
+  it("returns null/undefined when passed as object", () => {
+    //@ts-ignore
+    assert.strictEqual(
+      pickBy(null, () => true),
+      null,
+    );
+    //@ts-ignore
+    assert.strictEqual(
+      pickBy(undefined, () => true),
+      undefined,
+    );
+  });
+
+  it("handles object without symbols", () => {
+    const obj = { a: 1, b: 2, c: 3 };
+    assert.deepStrictEqual(
+      pickBy(obj, (val) => (val as number) > 1),
+      { b: 2, c: 3 },
+    );
+  });
+
   it("picks properties by function", () => {
     const obj = {
       slon1: "1",
