@@ -9,44 +9,27 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          node-version: 14
-          cache: 'yarn'
+          node-version: 24
+          cache: "npm"
 
-      - run: yarn install --frozen-lockfile --ignore-optional --non-interactive --silent
-      - run: node --expose-gc node_modules/jest/bin/jest --forceExit --logHeapUsage --runInBand --ci
+      - run: npm cit
 
-      - uses: codecov/codecov-action@v3
+      - uses: codecov/codecov-action@v5
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
+          use_oidc: true
           verbose: true
           files: coverage/coverage-final.json
-
-  lint-package:
+  publish-npm:
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          node-version: 14
-          cache: 'yarn'
-      - run: yarn install --frozen-lockfile --ignore-optional --non-interactive --silent
-      - run: yarn npmPkgJsonLint .
-
-  publish-npm:
-    needs: lint-package
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 14
-          cache: 'yarn'
-          registry-url: https://registry.npmjs.org/
-      - run: yarn install --frozen-lockfile --ignore-optional --non-interactive --silent
-      - run: yarn publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm publish --access public
