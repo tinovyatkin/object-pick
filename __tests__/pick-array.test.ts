@@ -8,6 +8,10 @@ describe("pick works with array", () => {
     assert.deepStrictEqual(pick([1, 2, 3, 4], [10, 11]), []);
   });
 
+  it("treats index equal to length as out of range", () => {
+    assert.deepStrictEqual(pick([1, 2, 3, 4], [4]), []);
+  });
+
   it("works with positive indexes", () => {
     assert.deepStrictEqual(pick([1, 2, 3, 4], [0, 2]), [1, 3]);
   });

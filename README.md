@@ -3,7 +3,7 @@
 [![codecov](https://codecov.io/gh/tinovyatkin/object-pick/branch/master/graph/badge.svg)](https://codecov.io/gh/tinovyatkin/object-pick)
 
 Tiny TypeScript alternative to `only`, `lodash.pick`, and `lodash.pickBy`.
-Built for ES2019+ environments and implemented on top of `Object.fromEntries`.
+Built for ES2019+ environments.
 
 ## Installation
 
@@ -42,13 +42,7 @@ it("picks items by function, providing accumulated array to predicate", () => {
 
 ## Compatibility
 
-This package relies on `Object.fromEntries`:
-
-- <https://node.green/#ES2019-features--Object-fromEntries> (Node.js >= 12.4)
-- <https://caniuse.com/#search=fromEntries>
-
-If you need to support older environments, polyfill `Object.fromEntries` (for
-example via `core-js`) in your build pipeline.
+This package targets Node.js >= 12.4 / ES2019+ environments.
 
 ## License
 
