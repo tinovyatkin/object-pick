@@ -18,22 +18,19 @@ export function pick<T extends object, U extends keyof T>(
   props: readonly U[],
 ): Pick<T, U>;
 
-export function pick<T extends unknown[]>(
-  array: T,
-  indexes: readonly number[],
-): T;
+export function pick<T extends unknown[]>(array: T, indexes: readonly number[]): T;
 
 export function pick(
   objectOrArray: Record<PropertyKey, unknown> | readonly unknown[],
   props: readonly PropertyKey[],
 ) {
   if (!objectOrArray) return objectOrArray;
-  if (typeof props?.some !== 'function') return objectOrArray;
+  if (typeof props?.some !== "function") return objectOrArray;
 
   if (objectOrArray instanceof Array) {
     return props
       .filter((i): i is number => {
-        if (typeof i !== 'number' || !Number.isInteger(i))
+        if (typeof i !== "number" || !Number.isInteger(i))
           throw new TypeError(
             `While picking from an array we expect array of integer indexes to pick, but got ${String(
               i,
@@ -41,22 +38,20 @@ export function pick(
           );
         return Math.abs(i) <= objectOrArray.length;
       })
-      .map(i => objectOrArray[i < 0 ? objectOrArray.length + i : i]);
+      .map((i) => objectOrArray[i < 0 ? objectOrArray.length + i : i]);
   }
 
-  if (typeof objectOrArray !== 'object') return objectOrArray;
+  if (typeof objectOrArray !== "object") return objectOrArray;
   const entries: [string | symbol, unknown][] = Object.entries(objectOrArray);
-  if (props.some(property => typeof property === 'symbol')) {
-    const symbolProps: [symbol, unknown][] = Object.getOwnPropertySymbols(
-      objectOrArray,
-    ).map(symbol => [symbol, objectOrArray[symbol]]);
+  if (props.some((property) => typeof property === "symbol")) {
+    const symbolProps: [symbol, unknown][] = Object.getOwnPropertySymbols(objectOrArray).map(
+      (symbol) => [symbol, objectOrArray[symbol]],
+    );
     entries.push(...symbolProps);
   }
   const properties = new Set(props);
   if (properties.size === 0) return {};
-  return Object.fromEntries(
-    entries.filter(([property]) => properties.has(property)),
-  );
+  return Object.fromEntries(entries.filter(([property]) => properties.has(property)));
 }
 
 /**
@@ -90,13 +85,12 @@ export function pickBy(
   objectOrArray: Record<PropertyKey, unknown> | readonly unknown[],
   predicate: (...args) => boolean,
 ) {
-  if (!objectOrArray || typeof predicate !== 'function') return objectOrArray;
+  if (!objectOrArray || typeof predicate !== "function") return objectOrArray;
 
   if (objectOrArray instanceof Array) {
-    return objectOrArray.reduce<typeof objectOrArray[number][]>(
+    return objectOrArray.reduce<(typeof objectOrArray)[number][]>(
       (accumulator, currentValue, currentIndex) => {
-        if (predicate(currentValue, currentIndex, accumulator))
-          accumulator.push(currentValue);
+        if (predicate(currentValue, currentIndex, accumulator)) accumulator.push(currentValue);
         return accumulator;
       },
       [],
@@ -106,7 +100,7 @@ export function pickBy(
   return Object.fromEntries(
     [
       ...Object.entries(objectOrArray),
-      ...Object.getOwnPropertySymbols(objectOrArray).map(symbol => [
+      ...Object.getOwnPropertySymbols(objectOrArray).map((symbol) => [
         symbol,
         objectOrArray[symbol],
       ]),
