@@ -22,7 +22,10 @@ export function pick<T extends object, U extends keyof T>(
   props: readonly U[],
 ): Pick<T, U>;
 
-export function pick<T extends unknown[]>(array: T, indexes: readonly number[]): T;
+export function pick<T extends readonly unknown[]>(
+  array: T,
+  indexes: readonly number[],
+): Array<T[number]>;
 
 export function pick(
   objectOrArray: Record<PropertyKey, unknown> | readonly unknown[],
