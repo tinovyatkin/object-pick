@@ -62,3 +62,7 @@ typings/
 
 dist
 .tsbuildinfo
+
+# Test output
+lcov.info
+junit.xml

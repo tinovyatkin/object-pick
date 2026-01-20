@@ -1,17 +1,10 @@
 {
-  // See http://go.microsoft.com/fwlink/?LinkId=827846
-  // for the documentation about the extensions.json format
-  "recommendations": [
-    "aaron-bond.better-comments",
-    "bierner.emojisense",
-    "codezombiech.gitignore",
+  "recommendations": ["oxc.oxc-vscode", "rvben.rumdl", "tekumara.typos-vscode"],
+  "unwantedRecommendations": [
     "dbaeumer.vscode-eslint",
-    "drknoxy.eslint-disable-snippets",
+    "biomejs.biome",
     "esbenp.prettier-vscode",
-    "github.vscode-pull-request-github",
-    "orta.vscode-jest",
-    "redhat.vscode-yaml",
-    "streetsidesoftware.code-spell-checker",
-    "wakatime.vscode-wakatime"
+    "DavidAnson.vscode-markdownlint",
+    "unifiedjs.vscode-remark"
   ]
 }

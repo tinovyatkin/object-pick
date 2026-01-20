@@ -13,50 +13,91 @@
  * only(object, ['a', 'c']);
  * // => { 'a': 1, 'c': 3 }
  */
+function isUnknownArray(value: unknown): value is readonly unknown[] {
+  return Array.isArray(value);
+}
+
 export function pick<T extends object, U extends keyof T>(
   object: T,
   props: readonly U[],
 ): Pick<T, U>;
 
-export function pick<T extends unknown[]>(
+export function pick<T extends readonly unknown[]>(
   array: T,
   indexes: readonly number[],
-): T;
+): Array<T[number]>;
 
 export function pick(
   objectOrArray: Record<PropertyKey, unknown> | readonly unknown[],
   props: readonly PropertyKey[],
 ) {
   if (!objectOrArray) return objectOrArray;
-  if (typeof props?.some !== 'function') return objectOrArray;
+  if (!Array.isArray(props)) return objectOrArray;
 
-  if (objectOrArray instanceof Array) {
-    return props
-      .filter((i): i is number => {
-        if (typeof i !== 'number' || !Number.isInteger(i))
-          throw new TypeError(
-            `While picking from an array we expect array of integer indexes to pick, but got ${String(
-              i,
-            )}`,
-          );
-        return Math.abs(i) <= objectOrArray.length;
-      })
-      .map(i => objectOrArray[i < 0 ? objectOrArray.length + i : i]);
+  if (isUnknownArray(objectOrArray)) {
+    const length = objectOrArray.length;
+    const result: unknown[] = [];
+
+    for (const index of props) {
+      if (typeof index !== "number" || !Number.isInteger(index)) {
+        throw new TypeError(
+          `While picking from an array we expect array of integer indexes to pick, but got ${String(
+            index,
+          )}`,
+        );
+      }
+
+      const normalizedIndex = index < 0 ? length + index : index;
+      if (normalizedIndex >= 0 && normalizedIndex < length) {
+        result.push(objectOrArray[normalizedIndex]);
+      }
+    }
+
+    return result;
   }
 
-  if (typeof objectOrArray !== 'object') return objectOrArray;
-  const entries: [string | symbol, unknown][] = Object.entries(objectOrArray);
-  if (props.some(property => typeof property === 'symbol')) {
-    const symbolProps: [symbol, unknown][] = Object.getOwnPropertySymbols(
-      objectOrArray,
-    ).map(symbol => [symbol, objectOrArray[symbol]]);
-    entries.push(...symbolProps);
+  if (typeof objectOrArray !== "object") return objectOrArray;
+
+  if (props.length === 0) return {};
+
+  if (props.length === 1) {
+    const key = props[0];
+    if (typeof key === "symbol") {
+      if (Object.prototype.propertyIsEnumerable.call(objectOrArray, key)) {
+        return { [key]: objectOrArray[key] };
+      }
+      return {};
+    }
+
+    const stringKey = String(key);
+    if (Object.prototype.propertyIsEnumerable.call(objectOrArray, stringKey)) {
+      return { [stringKey]: objectOrArray[stringKey] };
+    }
+    return {};
   }
-  const properties = new Set(props);
-  if (properties.size === 0) return {};
-  return Object.fromEntries(
-    entries.filter(([property]) => properties.has(property)),
-  );
+
+  const stringKeys = new Set<string>();
+  const symbolKeys = new Set<symbol>();
+  for (const key of props) {
+    if (typeof key === "symbol") symbolKeys.add(key);
+    else stringKeys.add(String(key));
+  }
+
+  const result: Record<PropertyKey, unknown> = {};
+
+  for (const key of stringKeys) {
+    if (Object.prototype.propertyIsEnumerable.call(objectOrArray, key)) {
+      result[key] = objectOrArray[key];
+    }
+  }
+
+  for (const key of symbolKeys) {
+    if (Object.prototype.propertyIsEnumerable.call(objectOrArray, key)) {
+      result[key] = objectOrArray[key];
+    }
+  }
+
+  return result;
 }
 
 /**
@@ -90,26 +131,31 @@ export function pickBy(
   objectOrArray: Record<PropertyKey, unknown> | readonly unknown[],
   predicate: (...args) => boolean,
 ) {
-  if (!objectOrArray || typeof predicate !== 'function') return objectOrArray;
+  if (!objectOrArray || typeof predicate !== "function") return objectOrArray;
 
-  if (objectOrArray instanceof Array) {
-    return objectOrArray.reduce<typeof objectOrArray[number][]>(
-      (accumulator, currentValue, currentIndex) => {
-        if (predicate(currentValue, currentIndex, accumulator))
-          accumulator.push(currentValue);
-        return accumulator;
-      },
-      [],
-    );
+  if (isUnknownArray(objectOrArray)) {
+    const result: unknown[] = [];
+    for (let i = 0; i < objectOrArray.length; i++) {
+      const value = objectOrArray[i];
+      if (predicate(value, i, result)) result.push(value);
+    }
+    return result;
   }
 
-  return Object.fromEntries(
-    [
-      ...Object.entries(objectOrArray),
-      ...Object.getOwnPropertySymbols(objectOrArray).map(symbol => [
-        symbol,
-        objectOrArray[symbol],
-      ]),
-    ].filter(([key, value]) => predicate(value, key)),
-  ) as Partial<typeof objectOrArray>;
+  const result: Record<PropertyKey, unknown> = {};
+
+  for (const key of Object.keys(objectOrArray)) {
+    const value = objectOrArray[key];
+    if (predicate(value, key)) result[key] = value;
+  }
+
+  const symbols = Object.getOwnPropertySymbols(objectOrArray);
+  if (symbols.length > 0) {
+    for (const symbol of symbols) {
+      const value = objectOrArray[symbol];
+      if (predicate(value, symbol)) result[symbol] = value;
+    }
+  }
+
+  return result as Partial<typeof objectOrArray>;
 }

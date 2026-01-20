@@ -1,25 +1,23 @@
 {
-  "enabled": true,
-  "extends": [
-    ":pinSkipCi",
-    "default:pinDigestsDisabled",
-    "config:base",
-    ":automergeMinor"
-  ],
-  "baseBranch": "master",
-  "respectLatest": false,
-  "labels": ["dependencies"],
-  "timezone": "America/Santo_Domingo",
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:best-practices", ":gitSignOff", ":semanticCommits"],
+  "dependencyDashboard": false,
   "automerge": true,
-  "pin": {
-    "requiredStatusChecks": null
+  "platformAutomerge": true,
+  "lockFileMaintenance": {
+    "enabled": true,
+    "automerge": true
   },
-  "vulnerabilityAlerts": {
-    "labels": ["dependencies", "security"]
-  },
+  "schedule": ["after 9am and before 5pm every weekday", "every weekend"],
+  "timezone": "UTC",
+  "labels": ["dependencies", "renovate"],
+  "commitMessagePrefix": "chore(deps):",
+  "semanticCommits": "enabled",
+  "rebaseWhen": "conflicted",
+  "rangeStrategy": "bump",
   "packageRules": [
     {
-      "depTypeList": ["dependencies"],
+      "matchDepTypes": ["dependencies"],
       "bumpVersion": "patch"
     }
   ]
