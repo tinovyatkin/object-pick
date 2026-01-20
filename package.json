@@ -41,7 +41,7 @@
     }
   },
   "scripts": {
-    "prepack": "lefthook install",
+    "prepare": "lefthook install",
     "prebuild": "rm -rf dist",
     "build": "tsc --module es2022 --moduleResolution node --outDir ./dist/esm && tsc --module commonjs --moduleResolution node --outDir ./dist/cjs",
     "postbuild": "mv ./dist/cjs/index.js ./dist/cjs/index.cjs && mv ./dist/cjs/index.js.map ./dist/cjs/index.cjs.map",
