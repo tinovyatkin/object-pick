@@ -1,6 +1,6 @@
 {
   "name": "object-pickby",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "Creates an object composed of the picked object properties. Written in Typescript for ES2022+ environments.",
   "keywords": [
     "lodash-es",
